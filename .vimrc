@@ -170,9 +170,6 @@ function! TrimWhitespace()
 endfunction
 autocmd BufWritePre * :call TrimWhitespace()
 
-" THEME
-colorscheme nord
-
 " Specific Mappings
 function! NetrwMapping()
     nmap <buffer> h -^
@@ -197,3 +194,6 @@ augroup cs_mapping
     autocmd filetype cs call CSMapping()
 augroup END
 
+" Theme is not set so yu don't get an error when first opening VIM.
+" This is important in install scripts.
+" To set the Nordtheme, add the following line: 'colorscheme nord'
