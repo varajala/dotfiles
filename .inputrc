@@ -1,0 +1,15 @@
+# Load system-wide config
+$include /etc/inputrc
+
+# Disable bell
+set bell-style none
+
+# Ctrl + Del delete word
+"\e[3;5~": kill-word
+
+# Ctrl + Backspace to remove word
+"\C-h": backward-kill-word
+
+# Case insensitivity when autocompleting
+set completion-ignore-case on
+

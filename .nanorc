@@ -1,0 +1,17 @@
+set autoindent
+set quickblank
+set softwrap
+set tabsize 4
+set tabstospaces
+set wordbounds
+set linenumbers
+set minibar
+set wordchars "()[]-_?!/&<+-="
+
+set titlecolor green
+set keycolor blue
+set numbercolor green
+
+unset suspend
+unset backup
+unset casesensitive

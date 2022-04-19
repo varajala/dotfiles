@@ -1,0 +1,215 @@
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Check terminal for colors
+# Set PS1 in shell specific rc-file,
+# call unset color_prompt, when PS1 is set.
+color_prompt=""
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# Enable color support
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -lah --color=auto --group-directories-first'
+    alias grep='grep --color=auto'
+fi
+
+# Setup environment variables
+dev_directory="$HOME/dev"
+
+export EDITOR='vim'
+
+if [ -x /usr/bin/batcat ]; then
+    alias bat='batcat --color=always'
+    # Nord theme for bat requires manual install...
+    # export BAT_THEME='nord'
+    export BAT_STYLE='numbers'
+fi
+
+export RIPGREP_CONFIG_PATH='/home/varajala/.ripgreprc'
+
+export DOTNET_ROOT="$HOME/.dotnet"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+export PATH="$PATH:$HOME/.dotnet"
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+# Setup Node.js
+export NODEJS_VERSION='16.13.2'
+export NODE_INSTALL_DIRECTORY="$dev_directory/js/.node"
+
+if [ -f "$NODE_INSTALL_DIRECTORY/$NODEJS_VERSION/bin/node" ]; then
+    export PATH="$PATH:$NODE_INSTALL_DIRECTORY/$NODEJS_VERSION/bin"
+fi
+
+unset dev_directory
+
+# Set exa as replacement of ls and set colors
+if [ -x /usr/bin/exa ]; then
+    alias ls='exa -la --group-directories-first'
+
+    # Print icons if coloured prompt
+    if [ "$color_prompt" = "yes" ]; then
+      alias ls='exa -la --group-directories-first --icons'
+    fi
+
+    # File size
+    file_size_colors="sn=02;37;40m:sb=02;37;40m"
+    # Owner
+    file_owner_colors="uu=2;36;40m:gu=2;36;40m:un=2;36;40m:gn=2;36;40m"
+    # Read bits
+    read_bit_colors="ur=00;00:gr=00;00:tr=00;00"
+    # Write bits
+    write_bit_colors="uw=00;00:gw=00;00:tw=00;00"
+    # Exec bits / executable files
+    exec_colors="ex=00;33:ux=00;33:ue=00;33:gx=00;33:tx=00;33"
+    #Archives
+    arch_colors="*.zip=0;34:*.tar=0;34:*.xz=0;34:*.gz=0;34"
+    #Packages
+    pkg_colors="*.deb=0;36"
+    #Links
+    ln_colors="ln=04;37"
+    # Directories
+    dir_colors="di=00;32"
+    # Timestamp
+    time_colors="da=02;37;40m"
+    #PDFs
+    pdf_colors="*.pdf=00;31"
+
+    export EXA_COLORS="$file_size_colors:$file_owner_colors:$read_bit_colors:$write_bit_colors:$exec_colors:$arch_colors:$pkg_colors:$ln_colors:$dir_colors:$time_colors:$pdf_colors"
+    export LS_COLORS="$LS_COLORS:$dir_colors:ex=00;33:$arch_colors:$pkg_colors:$ln_colors:$pdf_colors"
+
+    unset file_size_colors
+    unset file_owner_colors
+    unset read_bit_colors
+    unset write_bit_colors
+    unset exec_colors
+    unset dir_colors
+    unset time_colors
+fi
+
+# Set fzf colors to match the overall color scheme
+if [ -x /usr/bin/fzf ]; then
+  export FZF_DEFAULT_OPTS='--prompt=": " --pointer="->" --ansi'
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color='bg:-1,bg+:-1,border:-1,prompt:#a3be8c,pointer:#a3be8c,marker:#a3be8c,fg:#81a1c1'"
+fi
+
+
+# Confirm removal / overwrites, use -f to override prompt
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+
+# Stop all services connected to docker.
+docker-stop() {
+  echo "------------------------------------------------------------------"
+  echo " Stopping docker.service, docker.socket and containerd.service... "
+  echo "                This must be done as root...                      "
+  echo "------------------------------------------------------------------"
+  echo "                                                                  "
+  echo " > Stopping docker.socket...                                      "
+  sudo systemctl stop docker.socket
+  echo " > Stopping containerd.service...                                 "
+  sudo systemctl stop containerd.service
+  echo " > Stopping docker.service                                        "
+  sudo systemctl stop docker.service
+}
+
+
+# Lookup the virtual environment from the current directory, use it if found
+# Requires 'setopt null_glob' to be set when using ZSH...
+py() {
+  local py_path=(./*env/bin/python3)
+  if [[ ! -e $py_path ]]; then
+    py_path="/usr/bin/python3"
+  fi
+  $py_path "$@"
+}
+
+
+# Execute a command from history
+search-history() {
+  local output
+  output=$(cat $HISTFILE | fzf --tac --no-sort)
+
+  test -z "$output" && return
+
+  case "$output" in
+    sudo*)
+        echo -n "Execute command: \"$output\"? [ y / n ] ";
+        read ans
+        test "$ans" = "y" && eval "$output"
+        return;;
+    rm*)
+        echo -n "Execute command: \"$output\"? [ y / n ] ";
+        read ans
+        test "$ans" = "y" && eval "$output"
+        return;;
+    reboot*) return;;
+    shutdown*) return;;
+  esac
+
+  eval "$output"
+}
+
+
+#List all colors
+termcolors () {
+  for i in {31..37}; do
+    for x in {0..8}; do
+      echo -ne "\e[$x;$i""m\\\e[$x;$i""m\e[0;33m ";
+    done;
+    echo;
+  done;
+}
+
+
+# Quickly edit vimrc
+vrc () {
+  vim "$HOME/.vimrc"
+}
+
+
+# Open different filetypes with one command
+open() {
+  case $1 in
+    *.pdf) evince $1;;
+    *.png) xdg-open $1;;
+    *.jpg) xdg-open $1;;
+    *.jpeg) xdg-open $1;;
+
+    *.txt) $EDITOR $1;;
+    *.py) $EDITOR $1;;
+    *.c) $EDITOR $1;;
+    *.cc) $EDITOR $1;;
+    *.h) $EDITOR $1;;
+    *.cpp) $EDITOR $1;;
+    *.js) $EDITOR $1;;
+    *.ts) $EDITOR $1;;
+    *.go) $EDITOR $1;;
+    *.java) $EDITOR $1;;
+    *.cs) $EDITOR $1;;
+    *.hs) $EDITOR $1;;
+
+    *.json) $EDITOR $1;;
+    *.yaml) $EDITOR $1;;
+
+    *) echo "ERROR: Not clear how to open this filetype..." ;;
+  esac
+}
+
+# Unpack different filetypes with one command
+unpack() {
+  case $1 in
+    *.tar.gz)    tar xzf $@   ;;
+    *.gz)        gunzip $@    ;;
+    *.tar)       tar xf $@    ;;
+    *.zip)       unzip $@     ;;
+    *.tar.xz)    tar xf $@    ;;
+    *)           echo "ERROR: Not clear how to unpack this filetype..." ;;
+  esac
+}
+

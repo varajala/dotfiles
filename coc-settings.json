@@ -1,0 +1,50 @@
+{
+    "coc.preferences.diagnostic.displayByAle": true,
+    "languageserver": {
+      "clangd": {
+        "command": "clangd",
+        "filetypes": ["c", "cc", "cpp", "c++"]
+      },
+        
+      "pyls": {
+        "command": "python3",
+        "args": ["-m", "pyls", "-vv", "--log-file", "/tmp/python-languageserver.log"],
+        "trace.server": "verbose",
+        "filetypes": ["python"],
+        "settings": {
+          "pyls": {
+            "enable": true,
+            "trace": {
+              "server": "verbose"
+            },
+            "plugins": {
+              "pyls_mypy": {
+                "enabled": true,
+                "live-mode": false
+              },
+              "jedi_completion": {
+                "enabled": true
+              },
+              "jedi_hover": {
+                "enabled": true
+              },
+              "jedi_references": {
+                "enabled": true
+               },
+              "jedi_signature_help": {
+                "enabled": true
+              },
+              "jedi_symbols": {
+                "enabled": true,
+                "all_scopes": true
+              },
+              "preload": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
