@@ -5,11 +5,10 @@ Personal Linux config files.
 
 ## Setup
 
-    cd /tmp
-    git clone https://github.com/varajala/dotfiles dotfiles-repo
-    cd dotfiles-repo
-    rm LICENSE
-    rm README.md
-    mv coc-settings.json ~/.vim
-    mv ./* ~
+    mkdir /tmp/dotfiles-repo
+    git clone https://github.com/varajala/dotfiles /tmp/dotfiles-repo
+    rm /tmp/dotfiles-repo/LICENSE
+    rm /tmp/dotfiles-repo/README.md
+    mv /tmp/dotfiles-repo/coc-settings.json ~/.vim
+    mv /tmp/dotfiles-repo/* "$HOME"
 
