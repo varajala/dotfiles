@@ -39,6 +39,8 @@ let g:ale_sign_info = 'i'
 let g:ale_sign_style_warning = 'w'
 let g:ale_linters = { 'cs': ['OmniSharp'] }
 
+" GITGUTTER
+let g:gitgutter_terminal_reports_focus = 0
 
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
