@@ -32,7 +32,7 @@ source "$HOME/.shell-config"
 source "$HOME/.bash-completions"
 
 if [ "$color_prompt" = "yes" ]; then
-    PS1=$'\[\033[0;36m\] \w\[\033[00m\]\[\033[0;92m\] 🠖 \[\033[00m\]'
+    PS1=$'\[\033[0;36m\] \w$(prompt_git_branch)\[\033[0;92m\] 🠖 \[\033[00m\]'
 else
     PS1=' \w > '
 fi
@@ -49,4 +49,5 @@ bind '"\C-s":"\C-u/usr/bin/zsh\n"'
 bind '"\C-o":"\C-uvim .\n"'
 
 bind '"\C-r":"\C-usearch-history\n"'
+
 

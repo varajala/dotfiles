@@ -18,6 +18,7 @@ setopt nocasematch
 setopt nocaseglob
 setopt null_glob
 setopt hist_ignore_all_dups
+setopt prompt_subst
 
 # Basic word modification bindings
 bindkey "^[[1;5C" forward-word
@@ -44,7 +45,7 @@ source "$HOME/.zsh-completions"
 
 if [ "$color_prompt" = yes ]; then
     autoload -U colors && colors
-    PS1="%{$fg[blue]%}(zsh)%{$fg[cyan]%} %~% %{$fg[green]%} 🠖 %{$reset_color%}"
+    PS1="%{$fg[blue]%}(zsh) %{$fg[cyan]%}%~% \$(prompt_git_branch)%{$fg[green]%}🠖 %{$reset_color%}"
 else
     PS1='(zsh) %~% > '
 fi

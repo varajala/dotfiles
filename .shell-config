@@ -102,6 +102,16 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
+# Show git branch and status in prompt
+prompt_git_branch() {
+    local git_status_color="\033[0;32m"
+    local current_branch="$(git branch --show-current 2>/dev/null || echo -n ' ')"
+    if [  "$current_branch" != ' ' ]; then
+        test ! -z "$(git status --short)" && git_status_color="\033[0;33m"
+        current_branch="$git_status_color 🜉 $current_branch\033[0;00m "
+    fi
+    echo -ne $current_branch
+}
 
 # Stop all services connected to docker.
 docker-stop() {
