@@ -2,8 +2,6 @@ syntax on
 filetype plugin on
 set encoding=utf-8
 set nocp
-set exrc
-set secure
 set noerrorbells
 set tabstop=4
 set shiftwidth=4
@@ -21,14 +19,14 @@ set undodir=~/.vim/undo
 set undofile
 set incsearch
 set nohlsearch
+set hidden
 set scrolloff=4
 set signcolumn=yes
 set updatetime=250
 
 let mapleader = " "
 nnoremap <C-s> :w<CR>
-noremap <C-w>t :vert ter ++close<CR> <C-w>L
-autocmd BufLeave * if &buftype == 'terminal' | silent! :wincmd q | endif
+noremap <C-w>t :vert ter <CR> <C-w>L
 
 " ALE
 let g:ale_disable_lsp = 1
@@ -39,8 +37,6 @@ let g:ale_sign_info = 'i'
 let g:ale_sign_style_warning = 'w'
 let g:ale_linters = { 'cs': ['OmniSharp'] }
 
-" GITGUTTER
-let g:gitgutter_terminal_reports_focus = 0
 
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
@@ -62,8 +58,24 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-python/python-syntax'
 
 call plug#end()
+
+" PYTHON SYNTAX
+let g:python_highlight_space_errors = 0
+let g:python_highlight_func_calls = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_string_format = 1
+let g:python_highlight_string_formatting = 1
+
+" JS SYNTAX
+let g:javascript_plugin_jsdoc = 1
+
+" GITGUTTER
+let g:gitgutter_terminal_reports_focus = 0
 
 " FZF
 nnoremap <C-p> :GFiles<CR>
@@ -72,14 +84,13 @@ nmap <buffer> <Leader>f :Tags<CR>
 let g:fzf_layout = {
  \ 'window': {
  \      'width': 1.0,
- \       'height': 0.50,
+ \       'height': 0.30,
  \       'relative': v:true,
  \       'yoffset': 1.0,
  \       'border': 'top'
  \       }
  \   }
-let g:fzf_preview_window = ['right']
-
+let g:fzf_preview_window = []
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -96,7 +107,7 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 " AIRLINE
-let g:airline_theme = 'nord'
+" let g:airline_theme = 'nord'
 let g:airline_unicode_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#ale#enabled = 1
@@ -112,7 +123,8 @@ let g:airline_symbols.dirty = '!'
 noremap <leader>c :Commentary<CR>
 
 " NETRW
-nnoremap <leader>e :Explore<CR>
+nnoremap <leader>e :Explore .<CR>
+nnoremap <leader>E :Explore<CR>
 let g:netrw_banner = 0
 
 " OmniSharp
@@ -196,6 +208,4 @@ augroup cs_mapping
     autocmd filetype cs call CSMapping()
 augroup END
 
-" Theme is not set so yu don't get an error when first opening VIM.
-" This is important in install scripts.
-" To set the Nordtheme, add the following line: 'colorscheme nord'
+" THEME
