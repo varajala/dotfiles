@@ -28,8 +28,6 @@ if [ -x /usr/bin/batcat ]; then
     export BAT_STYLE='numbers'
 fi
 
-export RIPGREP_CONFIG_PATH='/home/varajala/.ripgreprc'
-
 export DOTNET_ROOT="$HOME/.dotnet"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -37,7 +35,7 @@ export PATH="$PATH:$HOME/.dotnet"
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 # Setup Node.js
-export NODEJS_VERSION='16.13.2'
+export NODEJS_VERSION='16.14.2'
 export NODE_INSTALL_DIRECTORY="$dev_directory/js/.node"
 
 if [ -f "$NODE_INSTALL_DIRECTORY/$NODEJS_VERSION/bin/node" ]; then
@@ -111,21 +109,6 @@ prompt_git_branch() {
         current_branch="$git_status_color 🜉 $current_branch\033[0;00m "
     fi
     echo -ne $current_branch
-}
-
-# Stop all services connected to docker.
-docker-stop() {
-  echo "------------------------------------------------------------------"
-  echo " Stopping docker.service, docker.socket and containerd.service... "
-  echo "                This must be done as root...                      "
-  echo "------------------------------------------------------------------"
-  echo "                                                                  "
-  echo " > Stopping docker.socket...                                      "
-  sudo systemctl stop docker.socket
-  echo " > Stopping containerd.service...                                 "
-  sudo systemctl stop containerd.service
-  echo " > Stopping docker.service                                        "
-  sudo systemctl stop docker.service
 }
 
 
