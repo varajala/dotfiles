@@ -26,10 +26,10 @@ set updatetime=250
 
 let mapleader = " "
 nnoremap <C-s> :w<CR>
-nnoremap <leader>l :bn <CR>
-nnoremap <leader>h :bp <CR>
-nnoremap <leader>q :bd <CR>
-noremap <C-w>t :vert ter <CR> <C-w>L
+nnoremap <leader>l :bn<CR>
+nnoremap <leader>h :bp<CR>
+nnoremap <leader>q :bd<CR>
+noremap <C-w>t :vert ter<CR> <C-w>L
 
 " ALE
 let g:ale_disable_lsp = 1
@@ -79,6 +79,7 @@ let g:python_highlight_string_formatting = 1
 let g:javascript_plugin_jsdoc = 1
 
 " GITGUTTER
+let g:gitgutter_map_keys = 0
 let g:gitgutter_terminal_reports_focus = 0
 
 " FZF
@@ -109,8 +110,9 @@ command! -bang -nargs=* Rg
   \ . '-- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+
 " AIRLINE
-" let g:airline_theme = 'nord'
+let g:bufferline_echo = 0
 let g:airline_unicode_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#ale#enabled = 1
