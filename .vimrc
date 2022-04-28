@@ -26,6 +26,9 @@ set updatetime=250
 
 let mapleader = " "
 nnoremap <C-s> :w<CR>
+nnoremap <leader>l :bn <CR>
+nnoremap <leader>h :bp <CR>
+nnoremap <leader>q :bd <CR>
 noremap <C-w>t :vert ter <CR> <C-w>L
 
 " ALE
@@ -47,6 +50,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -80,7 +84,6 @@ let g:gitgutter_terminal_reports_focus = 0
 " FZF
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-f> :Rg 
-nmap <buffer> <Leader>f :Tags<CR>
 let g:fzf_layout = {
  \ 'window': {
  \      'width': 1.0,
