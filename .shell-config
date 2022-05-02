@@ -115,10 +115,15 @@ prompt_git_branch() {
 # Lookup the virtual environment from the current directory, use it if found
 # Requires 'setopt null_glob' to be set when using ZSH...
 py() {
+  local user_py_environment="$HOME/dev/py/.py-env"
   local py_path=(./*env/bin/python3)
   if [[ ! -e $py_path ]]; then
-    echo "ERROR: No virtual environment found in current directory..."
-    return 1
+    if [[ ! -x $user_py_environment ]]; then
+        echo "Creating new virtual environment in '$user_py_environment'..."
+        /usr/bin/python3 -m venv "$user_py_environment"
+        echo "New virtual environment created."
+    fi
+    py_path="$user_py_environment/bin/python3"
   fi
   $py_path "$@"
 }
