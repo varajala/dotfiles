@@ -117,7 +117,8 @@ prompt_git_branch() {
 py() {
   local py_path=(./*env/bin/python3)
   if [[ ! -e $py_path ]]; then
-    py_path="/usr/bin/python3"
+    echo "ERROR: No virtual environment found in current directory..."
+    return 1
   fi
   $py_path "$@"
 }
