@@ -128,6 +128,10 @@ py() {
   $py_path "$@"
 }
 
+# Print the current environment used byt the 'py'-function
+py-show() {
+  py -c 'import sys;print(sys.executable)'
+}
 
 # Execute a command from history
 search-history() {
