@@ -58,6 +58,7 @@ key_bindings:
   - { key: H,       mods: Alt,      action: ScrollPageUp     }
   - { key: Plus,    mods: Alt,      action: IncreaseFontSize }
   - { key: Minus,   mods: Alt,      action: DecreaseFontSize }
+  - { key: Return,  mods: Alt,      action: SpawnNewInstance }
 
   # Unbind defaults
   - { key: Plus,    mods: Control,  action: None             }

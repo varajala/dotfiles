@@ -54,7 +54,6 @@ Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 
 Plug 'dense-analysis/ale'
@@ -64,7 +63,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-python/python-syntax'
+Plug 'varajala/python-syntax'
 
 call plug#end()
 
