@@ -133,6 +133,20 @@ py-show() {
   py -c 'import sys;print(sys.executable)'
 }
 
+# View the current working directory as a tree
+tree-view() {
+  local output_file="/tmp/.tree-watch.log"
+  /usr/bin/exa -T --icons --color=always --group-directories-first "$@" > "$output_file"
+
+  local line_count=$(wc -l < "$output_file")
+  if [[ $line_count -gt $LINES ]]; then
+      less -rf "$output_file"
+  else
+      cat "$output_file"
+      echo ""
+  fi
+}
+
 # Execute a command from history
 search-history() {
   local output
