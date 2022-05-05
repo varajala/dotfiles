@@ -152,6 +152,8 @@ tree-view() {
   fi
 }
 
+alias tv='tree-view'
+
 # Execute a command from history
 search-history() {
   local output
