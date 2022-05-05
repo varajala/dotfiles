@@ -136,7 +136,12 @@ py-show() {
 # View the current working directory as a tree
 tree-view() {
   local output_file="/tmp/.tree-watch.log"
-  /usr/bin/exa -T --icons --color=always --group-directories-first "$@" > "$output_file"
+
+  if [[ -f ".gitignore" ]]; then
+      /usr/bin/exa -T --icons --color=always --group-directories-first --all --ignore-glob=".git|$(sed '/^$/d' .gitignore | sed '/^#/d' | tr '\n' '|')" "$@" > "$output_file"
+  else
+      /usr/bin/exa -T --icons --color=always --group-directories-first -L 1 "$@" > "$output_file"
+  fi
 
   local line_count=$(wc -l < "$output_file")
   if [[ $line_count -gt $LINES ]]; then
