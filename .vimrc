@@ -1,5 +1,7 @@
 syntax on
+filetype on
 filetype plugin on
+
 set encoding=utf-8
 set nocp
 set noerrorbells
@@ -23,6 +25,9 @@ set hidden
 set scrolloff=4
 set signcolumn=yes
 set updatetime=250
+set completeopt=menuone,noinsert
+set wildmenu
+set cursorline
 
 let mapleader = " "
 nnoremap <C-s> :w<CR>
@@ -40,6 +45,15 @@ let g:ale_sign_info = 'i'
 let g:ale_sign_style_warning = 'w'
 let g:ale_linters = { 'cs': ['OmniSharp'] }
 
+" PYTHON SYNTAX
+let g:python_highlight_space_errors = 0
+let g:python_highlight_builtin_types = 1
+let g:python_highlight_builtin_objs = 1
+let g:python_highlight_func_calls = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_string_format = 1
+let g:python_highlight_string_formatting = 1
+
 
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
@@ -50,7 +64,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -66,13 +79,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'varajala/python-syntax'
 
 call plug#end()
-
-" PYTHON SYNTAX
-let g:python_highlight_space_errors = 0
-let g:python_highlight_func_calls = 1
-let g:python_highlight_class_vars = 1
-let g:python_highlight_string_format = 1
-let g:python_highlight_string_formatting = 1
 
 " JS SYNTAX
 let g:javascript_plugin_jsdoc = 1
