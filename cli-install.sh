@@ -3,6 +3,10 @@
 # Run as default user...
 SCRIPT_VERSION="1.0.0"
 
+# Normally all output is hidden. Redirect these streams to log files if needed...
+REDIRECT_STDERR='/dev/null'
+REDIRECT_STDOUT='/dev/null'
+
 # Development environment config
 NODEJS_LATEST_STABLE="16.14.2"
 NODEJS_DOWNLOAD_URL="https://nodejs.org/dist/v$NODEJS_LATEST_STABLE/node-v$NODEJS_LATEST_STABLE-linux-x64.tar.xz"
@@ -24,7 +28,7 @@ apt_install_pkgs() {
     for pkg in $pkg_list; do
         echo " + (APT) $pkg"
     done
-    sudo apt-get install -y -qq "$@" 2>/dev/null 1>/dev/null
+    sudo apt-get install -y -qq "$@" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 }
 
 pip_install_pkgs() {
@@ -32,7 +36,7 @@ pip_install_pkgs() {
     for pkg in $pkg_list; do
         echo " + (PIP) $pkg"
     done
-    python3 -m pip install "$@" 2>/dev/null 1>/dev/null
+    python3 -m pip install "$@" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 }
 
 npm_install_pkgs() {
@@ -40,7 +44,7 @@ npm_install_pkgs() {
     for pkg in $pkg_list; do
         echo " + (NPM) $pkg"
     done
-    "$HOME/dev/js/.node/$NODEJS_LATEST_STABLE/bin/npm" install -g "$@" 2>/dev/null 1>/dev/null
+    "$HOME/dev/js/.node/$NODEJS_LATEST_STABLE/bin/npm" install -g "$@" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 }
 
 mkdir -p "$DOWNLOAD_DIR"
@@ -90,11 +94,11 @@ mkdir -p "$HOME/dev/clang"
 # SSH
 echo "-> Generating SSH key..."
 mkdir -p "$HOME/.ssh"
-ssh-keygen -t ed25519 -N '' -f "$HOME/.ssh/id_ed25519" 2>/dev/null 1>/dev/null
-echo "-> SSH key generated, you need to add it to the ssh-agent with:"
-echo ""
-echo '  $ ssh-add ~/.ssh/id_ed25519'
-echo ""
+ssh-keygen -t ed25519 -N '' -f "$HOME/.ssh/id_ed25519" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
+echo "-> Starting ssh-agent..."
+eval $(ssh-agent -s) 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
+echo "-> Adding SSH key to agent..."
+ssh-add "~/.ssh/id_ed25519" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 
 # Python
 echo "-> Installing development packages for Python..."
@@ -118,11 +122,11 @@ echo "-> Setting up .NET..."
 wget -q "$DOTNET_INSTALL_SCRIPT_URL" -O "$DOWNLOAD_DIR/dotnet-install.sh"
 chmod u+x "$DOWNLOAD_DIR/dotnet-install.sh"
 echo "-> Installing .NET SDK version 3.1..."
-"$DOWNLOAD_DIR/dotnet-install.sh" -c "3.1" --install-dir "$HOME/.dotnet" 1>/dev/null 2>/dev/null
+"$DOWNLOAD_DIR/dotnet-install.sh" -c "3.1" --install-dir "$HOME/.dotnet" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 echo "-> Installing .NET SDK version 5.0..."
-"$DOWNLOAD_DIR/dotnet-install.sh" -c "5.0" --install-dir "$HOME/.dotnet" 1>/dev/null 2>/dev/null
+"$DOWNLOAD_DIR/dotnet-install.sh" -c "5.0" --install-dir "$HOME/.dotnet" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 echo "-> Installing .NET SDK version 6.0..."
-"$DOWNLOAD_DIR/dotnet-install.sh" -c "6.0" --install-dir "$HOME/.dotnet" 1>/dev/null 2>/dev/null
+"$DOWNLOAD_DIR/dotnet-install.sh" -c "6.0" --install-dir "$HOME/.dotnet" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 
 # NodeJS
 echo "-> Setting up NodeJS..."
@@ -134,10 +138,10 @@ export PATH="$PATH:$HOME/dev/js/.node/$NODEJS_LATEST_STABLE/bin"
 echo "-> Installing NPM packages..."
 npm_install_pkgs typescript yarn
 
-# Dotfiles
+# DOTFILES
 echo "-> Setting up dotfiles..."
 mkdir -p "$HOME/.vim"
-git clone "$DOTFILES_REPO_URL" "$DOWNLOAD_DIR/dotfiles" 2>/dev/null 1>/dev/null
+git clone "$DOTFILES_REPO_URL" "$DOWNLOAD_DIR/dotfiles" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 mv "$DOWNLOAD_DIR/dotfiles/coc-settings.json" ~/.vim
 mv "$DOWNLOAD_DIR/dotfiles/.vimrc" $HOME
 mv "$DOWNLOAD_DIR/dotfiles/.bashrc" $HOME
@@ -160,7 +164,7 @@ echo "-> Installing dependencies..."
 pip_install_pkgs mypy python-language-server pyls_mypy
 apt_install_pkgs clangd exuberant-ctags
 echo "-> Update the clangd path in .vimrc if needed. Default is '/usr/lib/llvm-13'."
-vim -c "PlugInstall | qa" 2>/dev/null 1>/dev/null
+vim -c "PlugInstall | qa" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 echo -ne "colorscheme nord\n\n" >> "$HOME/.vimrc"
 
 echo ""
