@@ -95,8 +95,10 @@ mkdir -p "$HOME/dev/clang"
 echo "-> Generating SSH key..."
 mkdir -p "$HOME/.ssh"
 ssh-keygen -t ed25519 -N '' -f "$HOME/.ssh/id_ed25519" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
-echo "-> Starting ssh-agent..."
-eval $(ssh-agent -s) 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
+if [[ -z $SSH_AUTH_SOCK ]]; then
+    echo "-> Starting ssh-agent..."
+    eval $(ssh-agent -s) 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
+fi
 echo "-> Adding SSH key to agent..."
 ssh-add "~/.ssh/id_ed25519" 2>"$REDIRECT_STDERR" 1>"$REDIRECT_STDOUT"
 
