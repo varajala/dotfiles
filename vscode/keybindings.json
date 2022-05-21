@@ -1,0 +1,24 @@
+[
+    {
+        "key": "ctrl+w t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "copy"
+    },
+    {
+      "key": "escape",
+      "command": "workbench.action.closeSidebar",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.previousEditorInGroup"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.nextEditorInGroup"
+    }
+]
