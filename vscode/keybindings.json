@@ -20,5 +20,9 @@
     {
         "key": "alt+l",
         "command": "workbench.action.nextEditorInGroup"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.closeActiveEditor"
     }
 ]
