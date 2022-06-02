@@ -5,23 +5,44 @@
   "breadcrumbs.enabled": false,
   "extensions.ignoreRecommendations": true,
   "diffEditor.wordWrap": "on",
+  "explorer.openEditors.visible": 0,
+
+  // Outline
+  "outline.showVariables": false,
+  "outline.showTypeParameters": false,
+  "outline.showStrings": false,
+  "outline.showOperators": false,
+  "outline.showObjects": false,
+  "outline.showNumbers": false,
+  "outline.showNull": false,
+  "outline.showKeys": false,
+  "outline.showFields": false,
+  "outline.showEvents": false,
+  "outline.showBooleans": false,
 
   // Workbench
   "workbench.startupEditor": "none",
+  "workbench.activityBar.visible": false,
   "workbench.tips.enabled": false,
   "workbench.tree.indent": 10,
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.settings.editor": "json",
+  "workbench.editor.autoLockGroups": {
+    "terminalEditor": false
+  },
 
   // Window
-  "window.zoomLevel": 1,
   "window.menuBarVisibility": "hidden",
   "window.enableMenuBarMnemonics": false,
+  "window.zoomLevel": 1,
 
   // Terminal
   "terminal.integrated.fontFamily": "'Cousine Nerd Font'",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.defaultLocation": "editor",
 
   // Editor
   "editor.cursorBlinking": "solid",
@@ -42,7 +63,7 @@
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "editor.suggestSelection": "first",
-  "editor.fontSize": 15,
+  "editor.fontSize": 16,
   "editor.fontFamily": "'Cousine Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
   "editor.wordWrap": "off",
   "editor.bracketPairColorization.enabled": false,
@@ -77,6 +98,10 @@
       "commands": ["editor.action.showHover"]
     },
     {
+      "before": ["<leader>", "r"],
+      "commands": ["references-view.findReferences"]
+    },
+    {
       "before": ["<leader>", "c"],
       "commands": ["editor.action.commentLine"]
     },
@@ -85,8 +110,28 @@
       "commands": ["workbench.action.terminal.toggleTerminal"]
     },
     {
+      "before": ["<leader>", "o"],
+      "commands": [
+        "outline.focus",
+        "outline.focus"
+      ]
+    },
+    {
+      "before": ["<leader>", "E"],
+      "commands": [
+        "outline.focus",
+        "outline.removeView",
+        "workbench.files.action.focusFilesExplorer"
+      ]
+    },
+    {
       "before": ["<leader>", "e"],
-      "commands": ["workbench.files.action.focusFilesExplorer"]
+      "commands": [
+        "outline.focus",
+        "outline.removeView",
+        "workbench.files.action.focusFilesExplorer",
+        "workbench.files.action.collapseExplorerFolders"
+      ]
     }
   ],
 
