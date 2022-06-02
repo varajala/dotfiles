@@ -5,7 +5,12 @@
   "breadcrumbs.enabled": false,
   "extensions.ignoreRecommendations": true,
   "diffEditor.wordWrap": "on",
+
+  // Explorer
   "explorer.openEditors.visible": 0,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.decorations.colors": false,
 
   // Outline
   "outline.showVariables": false,
@@ -29,9 +34,6 @@
   "workbench.editor.enablePreview": false,
   "workbench.panel.defaultLocation": "right",
   "workbench.settings.editor": "json",
-  "workbench.editor.autoLockGroups": {
-    "terminalEditor": false
-  },
 
   // Window
   "window.menuBarVisibility": "hidden",
@@ -42,7 +44,6 @@
   "terminal.integrated.fontFamily": "'Cousine Nerd Font'",
   "terminal.integrated.fontSize": 16,
   "terminal.integrated.sendKeybindingsToShell": true,
-  "terminal.integrated.defaultLocation": "editor",
 
   // Editor
   "editor.cursorBlinking": "solid",
@@ -60,8 +61,6 @@
   "editor.suggest.preview": false,
   "editor.lightbulb.enabled": false,
   "editor.rulers": [],
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
   "editor.suggestSelection": "first",
   "editor.fontSize": 16,
   "editor.fontFamily": "'Cousine Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
