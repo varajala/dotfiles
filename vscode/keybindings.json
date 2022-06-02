@@ -5,24 +5,70 @@
         "when": "terminal.active"
     },
     {
-        "key": "ctrl+shift+c",
-        "command": "copy"
+        "key": "ctrl+w s",
+        "command": "workbench.action.splitEditorDown"
     },
     {
-      "key": "escape",
-      "command": "workbench.action.closeSidebar",
-      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+        "key": "ctrl+w v",
+        "command": "workbench.action.splitEditorRight"
     },
     {
-        "key": "alt+h",
+        "key": "ctrl+w q",
+        "command": "workbench.action.closeEditorsInGroup"
+    },
+    {
+        "key": "ctrl+w l",
+        "command": "workbench.action.focusRightGroup"
+    },
+    {
+        "key": "ctrl+w h",
+        "command": "workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "ctrl+w j",
+        "command": "workbench.action.focusNextGroup"
+    },
+    {
+        "key": "ctrl+w k",
+        "command": "workbench.action.focusPreviousGroup"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+p",
         "command": "workbench.action.previousEditorInGroup"
     },
     {
-        "key": "alt+l",
+        "key": "alt+n",
         "command": "workbench.action.nextEditorInGroup"
     },
     {
         "key": "alt+q",
         "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "alt+-",
+        "command": "workbench.action.zoomOut"
+    },
+    {
+        "key": "alt+oem_plus",
+        "command": "workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+    },
+    {
+      "key": "escape",
+      "command": "workbench.action.closeSidebar",
+      "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
     }
 ]
