@@ -31,9 +31,8 @@ set cursorline
 
 let mapleader = " "
 nnoremap <C-s> :w<CR>
-nnoremap <leader>l :bn<CR>
-nnoremap <leader>h :bp<CR>
-nnoremap <leader>q :bd<CR>
+nnoremap <C-j> }
+nnoremap <C-k> {
 noremap <C-w>t :vert ter<CR> <C-w>L
 
 " ALE
@@ -57,6 +56,7 @@ let g:python_highlight_string_formatting = 1
 
 call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -64,9 +64,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 
 Plug 'dense-analysis/ale'
@@ -88,6 +90,7 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_terminal_reports_focus = 0
 
 " FZF
+nnoremap <leader>f :BTags<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-f> :Rg 
 let g:fzf_layout = {
@@ -143,10 +146,8 @@ let g:OmniSharp_selector_ui = 'fzf'
 " COC
 " apt install clang clangd
 " python3 -m pip install mypy python-language-server pyls-mypy
-" autocmd BufWritePost *.cpp,*.h,*.c silent !ctags -R " autowrite ctags...
 let g:clang_library_path = '/usr/lib/llvm-13/lib/libclang.so.1'
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 nmap <silent> <leader>g <Plug>(coc-definition)
 nmap <silent> <leader>d :call <SID>show_documentation()<CR>
 
@@ -162,26 +163,6 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-function! FancyScreenDown()
-    let l:start_line = line('.')
-    normal! L
-    let l:end_line = line('.')
-    if start_line == end_line
-        normal! zt
-    endif
-endfunction
-nnoremap <silent> L :call FancyScreenDown()<CR>
-
-function! FancyScreenUp()
-    let l:start_line = line('.')
-    normal! H
-    let l:end_line = line('.')
-    if start_line == end_line
-        normal! zb
-    endif
-endfunction
-nnoremap <silent> H :call FancyScreenUp()<CR>
 
 function! TrimWhitespace()
     let l:line = line('.')
@@ -210,7 +191,6 @@ augroup END
 function! CSMapping()
     nmap <buffer> <leader>g :OmniSharpGotoDefinition<CR>
     nmap <buffer> <leader>d :OmniSharpDocumentation<CR>
-    nmap <buffer> <leader>a :OmniSharpCodeActions<CR>
 endfunction
 
 augroup cs_mapping
@@ -218,4 +198,16 @@ augroup cs_mapping
     autocmd filetype cs call CSMapping()
 augroup END
 
+function! JSMapping()
+    nmap <buffer> <leader>f :CocList outline<CR>
+endfunction
+
+augroup js_mapping
+    autocmd!
+    autocmd filetype typescript* call JSMapping()
+augroup END
+
 " THEME
+set background=dark
+colorscheme gruvbox
+
