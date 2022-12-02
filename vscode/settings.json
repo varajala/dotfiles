@@ -38,7 +38,6 @@
   // Window
   "window.menuBarVisibility": "hidden",
   "window.enableMenuBarMnemonics": false,
-  "window.zoomLevel": 1,
 
   // Terminal
   "terminal.integrated.fontFamily": "'Cousine Nerd Font'",
@@ -52,7 +51,11 @@
   "editor.cursorStyle": "block",
   "editor.codeLens": false,
   "editor.codeActionsOnSave": null,
-  "editor.quickSuggestions": true,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+  },
   "editor.suggestOnTriggerCharacters": false,
   "editor.wordBasedSuggestions": true,
   "editor.parameterHints.enabled": true,
@@ -62,7 +65,7 @@
   "editor.lightbulb.enabled": false,
   "editor.rulers": [],
   "editor.suggestSelection": "first",
-  "editor.fontSize": 16,
+  "editor.fontSize": 14,
   "editor.fontFamily": "'Cousine Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
   "editor.wordWrap": "off",
   "editor.bracketPairColorization.enabled": false,
@@ -142,5 +145,7 @@
   ],
 
   // Other Extensions
-  "rest-client.enableTelemetry": false
+  "rest-client.enableTelemetry": false,
+  "workbench.colorTheme": "Gruvbox Dark Soft",
+  "window.zoomLevel": 1
 }

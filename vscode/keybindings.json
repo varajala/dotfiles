@@ -75,6 +75,18 @@
         "command": "workbench.action.zoomReset"
     },
     {
+        "key": "alt+w",
+        "command": "workbench.action.quickOpenView"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.quickOpenNavigateNextInViewPicker"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.quickOpenNavigatePreviousInViewPicker"
+    },
+    {
         "key": "ctrl+j",
         "command": "workbench.action.quickOpenSelectNext",
         "when": "inQuickOpen"
@@ -88,5 +100,9 @@
       "key": "escape",
       "command": "workbench.action.closeSidebar",
       "when": "sideBarVisible && !inputFocus"
-    }
+    },
+    {
+        "key": "F5",
+        "command": "workbench.action.debug.selectandstart",
+    },
 ]
