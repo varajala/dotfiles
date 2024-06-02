@@ -7,7 +7,7 @@
   "diffEditor.wordWrap": "on",
 
   // Explorer
-  "explorer.openEditors.visible": 0,
+  "explorer.openEditors.visible": 1,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.decorations.colors": false,
@@ -34,9 +34,11 @@
   "workbench.editor.enablePreview": false,
   "workbench.panel.defaultLocation": "right",
   "workbench.settings.editor": "json",
+  "workbench.layoutControl.enabled": false,
 
   // Window
   "window.menuBarVisibility": "hidden",
+  "window.commandCenter": false,
   "window.enableMenuBarMnemonics": false,
 
   // Terminal
@@ -50,7 +52,7 @@
   "editor.renderWhitespace": "none",
   "editor.cursorStyle": "block",
   "editor.codeLens": false,
-  "editor.codeActionsOnSave": null,
+  "editor.codeActionsOnSave": [],
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on",
@@ -86,6 +88,10 @@
     {
       "before": ["<C-f>"],
       "commands": ["workbench.action.findInFiles"]
+    },
+    {
+      "before": ["<C-p>"],
+      "commands": ["workbench.action.quickOpen"]
     },
     {
       "before": ["<leader>", "f"],
@@ -147,5 +153,7 @@
   // Other Extensions
   "rest-client.enableTelemetry": false,
   "workbench.colorTheme": "Gruvbox Dark Soft",
+
+  // Zoom level is likely to change...
   "window.zoomLevel": 1
 }
