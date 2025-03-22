@@ -45,18 +45,8 @@
         "command": "workbench.action.previousEditorInGroup"
     },
     {
-      "key": "alt+p",
-      "command": "workbench.action.nextSideBarView",
-      "when": "sideBarFocus"
-    },
-    {
         "key": "alt+n",
         "command": "workbench.action.nextEditorInGroup"
-    },
-    {
-      "key": "alt+n",
-      "command": "workbench.action.previousSideBarView",
-      "when": "sideBarFocus"
     },
     {
         "key": "alt+q",
@@ -67,12 +57,16 @@
         "command": "workbench.action.zoomOut"
     },
     {
-        "key": "alt+[Minus]",
+        "key": "alt+oem_plus",
         "command": "workbench.action.zoomIn"
     },
     {
-        "key": "alt+=",
-        "command": "workbench.action.zoomReset"
+        "key": "ctrl+-",
+        "command": "-workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+oem_plus",
+        "command": "-workbench.action.zoomIn"
     },
     {
         "key": "alt+w",
@@ -97,12 +91,84 @@
         "when": "inQuickOpen"
     },
     {
-      "key": "escape",
-      "command": "workbench.action.closeSidebar",
-      "when": "sideBarVisible && !inputFocus"
+        "key": "ctrl+j",
+        "command": "list.focusDown",
+        "when": "listFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "list.focusUp",
+        "when": "listFocus"
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus && activeViewlet == 'workbench.view.extensions'"
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closeSidebar",
+        "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.closeSidebar",
+        "when": "filesExplorerFocus && !inputFocus && !renameInputVisible"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "alt+enter",
+        "command": "composer.startComposerPrompt"
+    },
+    {
+        "key": "shift+h",
+        "command": "workbench.files.action.collapseExplorerFolders",
+        "when": "sideBarVisible && !inputFocus"
+    },
+    {
+        "key": "n",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "f",
+        "command": "list.find",
+        "when": "listFocus && listSupportsFind"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "shift+n",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown.showPreview",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
     },
     {
         "key": "F5",
         "command": "workbench.action.debug.selectandstart",
     },
+    {
+        "key": "F5",
+        "command": "mssql.runQuery",
+        "when": "editorTextFocus && editorLangId == 'sql'"
+    }
 ]
