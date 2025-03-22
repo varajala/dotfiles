@@ -155,6 +155,7 @@ mv "$DOWNLOAD_DIR/dotfiles/.bash-completions" $HOME
 mv "$DOWNLOAD_DIR/dotfiles/.zsh-completions" $HOME
 mv "$DOWNLOAD_DIR/dotfiles/.tmux.conf" $HOME
 mv "$DOWNLOAD_DIR/dotfiles/.profile" $HOME
+mv "$DOWNLOAD_DIR/dotfiles/.gitconfig" $HOME
 source "$HOME/.bashrc"
 
 # VIM

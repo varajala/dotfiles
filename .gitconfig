@@ -1,10 +1,15 @@
+[init]
+	defaultBranch = main
 [alias]
-        ss = status --short --branch
-        hist = log --pretty=\"%n%C(yellow)%D%n%C(Green)%h%C(reset) - %C(cyan)%s%C(reset)%n%ar%n%an\" --stat --decorate
-        graph = log --pretty --oneline --graph --decorate
+    ss = status --short --branch
+    hist = log --pretty=\"%n%C(yellow)%D%n%C(Green)%h%C(reset) - %C(cyan)%s%C(reset)%n%ar%n%an\" --stat --decorate
+    graph = log --pretty --oneline --graph --decorate
 [color "status"]
-        local = cyan
-        branch = cyan
-        remote = blue
-        remoteBranch = blue
-        localBranch = cyan
+    local = cyan
+    branch = cyan
+    remote = blue
+    remoteBranch = blue
+    localBranch = cyan
+[core]
+    autocrlf = input ; Linux
+    # autocrlf = true ; Windows
