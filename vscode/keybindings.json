@@ -141,7 +141,7 @@
     {
         "key": "f",
         "command": "list.find",
-        "when": "listFocus && listSupportsFind"
+        "when": "filesExplorerFocus && listSupportsFind && !inputFocus"
     },
     {
         "key": "r",
